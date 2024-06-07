@@ -15,7 +15,7 @@ RUN tar xzf postgresql-13.7.tar.gz
 
 # Configure the PostgreSQL build with additional support for Kerberos, OpenSSL, OpenLDAP, PAM, zlib, Perl, Python, and Tcl
 RUN /home/tutorial/postgresql-13.7/configure --prefix=/home/tutorial/pgsql13 \
-    --with-pgport=5555 \
+ --with-pgport=5555
   #  --with-krb5 \
   #  --with-openssl \
   #  --with-ldap \
