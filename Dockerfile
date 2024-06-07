@@ -5,8 +5,7 @@ WORKDIR /home/tutorial
 # Add user 'postgres'
 RUN set -eux; \
      adduser -D -H postgres; \
-     mkdir -p /home/tutorial/pgsql13; \
-     chown -R postgres:postgres /home/tutorial/pgsql13
+     mkdir -p /home/tutorial/pgsql13
 
 # Install required packages
 RUN apk update && \
@@ -40,13 +39,20 @@ ENV PGDATA /home/tutorial/pgsql13/data
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 0700 "$PGDATA"
 ENV PATH /home/tutorial/pgsql13/bin:$PATH
 
+# Change ownership of the PostgreSQL directory to the 'postgres' user
+RUN chown -R postgres:postgres /home/tutorial/pgsql13
+
 # Switch to the 'postgres' user to initialize the database
 USER postgres
-# initdb
-RUN initdb -U postgres -k -D /home/tutorial/pgsql13/data
 
 EXPOSE 5555
 
-# Switch back to root to set the CMD
-USER root
+# Initialize the database
+RUN /home/tutorial/pgsql13/bin/initdb -D /home/tutorial/pgsql13/data
+
+# Set the entrypoint to initialize and start PostgreSQL
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
+
+
 CMD ["tail", "-f", "/dev/null"]
