@@ -26,7 +26,8 @@ RUN /home/tutorial/postgresql-13.7/configure --prefix=/home/tutorial/pgsql13 \
   #  --with-tcl
 
 # Build and install PostgreSQL
-#RUN make -C /home/tutorial/postgresql-13.7 && \
-#    make -C /home/tutorial/postgresql-13.7 install
+RUN make  /home/tutorial/postgresql-13.7 && \
+    make  /home/tutorial/postgresql-13.7 install
 
+EXPOSE 5555
 CMD ["tail", "-f", "/dev/null"]
