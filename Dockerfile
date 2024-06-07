@@ -3,7 +3,7 @@ FROM alpine:3.20
 # Install required packages
 RUN apk update && \
     apk add --no-cache curl gcc make musl-dev readline-dev  zlib-dev \
-    perl-dev python3-dev tcl-dev
+    perl-dev python3-dev tcl-dev linux-headers libxml2-dev
 
 WORKDIR /home/tutorial
 
