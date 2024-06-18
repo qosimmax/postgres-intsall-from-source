@@ -31,8 +31,13 @@ RUN /home/tutorial/postgresql-13.7/configure --prefix=/home/tutorial/pgsql13 \
   #  --with-tcl
 
 # Build and install PostgreSQL
-RUN make  /home/tutorial/postgresql-13.7 && \
-    make  /home/tutorial/postgresql-13.7 install
+RUN make world /home/tutorial/postgresql-13.7 && \
+    make  /home/tutorial/postgresql-13.7 install-world
+
+# Build and install PostgreSQL extensions
+RUN set -eux; \
+    make world  /home/tutorial/postgresql-13.7/contrib && \
+    make  /home/tutorial/postgresql-13.7/contrib install-world
 
 # set PGDATA
 ENV PGDATA /home/tutorial/pgsql13/data
