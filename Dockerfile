@@ -28,6 +28,9 @@ RUN /home/tutorial/postgresql-13.7/configure --prefix=/home/tutorial/pgsql13 \
   #  --with-zlib \
   #  --with-perl \
   # --with-python \
+
+
+
   #  --with-tcl
 
 # Build and install PostgreSQL
