@@ -56,7 +56,7 @@ USER postgres
 EXPOSE 5555
 
 # Initialize the database
-RUN /home/tutorial/pgsql13/bin/initdb -D /home/tutorial/pgsql13/data
+RUN /home/tutorial/pgsql13/bin/initdb -U postgres -D /home/tutorial/pgsql13/data
 
 # Set the entrypoint to initialize and start PostgreSQL
 COPY docker-entrypoint.sh /usr/local/bin/
